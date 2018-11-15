@@ -1,0 +1,14 @@
+prefix=/Users/hemsl/Desktop/player/FFmpeg/android/arm
+exec_prefix=${prefix}
+libdir=/Users/hemsl/Desktop/player/FFmpeg/android/arm/lib
+includedir=/Users/hemsl/Desktop/player/FFmpeg/android/arm/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 56.19.101
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil -pthread -lm
+Libs.private: 
+Cflags: -I${includedir}

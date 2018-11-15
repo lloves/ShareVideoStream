@@ -1,0 +1,14 @@
+prefix=/Users/hemsl/Desktop/player/FFmpeg/android/arm
+exec_prefix=${prefix}
+libdir=/Users/hemsl/Desktop/player/FFmpeg/android/arm/lib
+includedir=/Users/hemsl/Desktop/player/FFmpeg/android/arm/include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 58.33.100
+Requires: libswresample >= 3.2.100, libavutil >= 56.19.101
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavcodec -pthread -lm -lz
+Libs.private: 
+Cflags: -I${includedir}

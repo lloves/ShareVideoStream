@@ -1,0 +1,40 @@
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := sharestream
+LOCAL_MODULE_TAGS := optional
+LOCAL_CFLAGS = -D_FILE_OFFSET_BITS=64
+LOCAL_SRC_FILES =  sharestream.c
+LOCAL_C_INCLUDES += \
+		$(LOCAL_PATH)/ffmpeg/include \
+		external/zlib
+
+LOCAL_LDLIBS := -lm -lc -lz
+	
+LOCAL_SHARED_LIBRARIES := libcutils libutils libz libc
+
+LOCAL_LDFLAGS := \
+	$(LOCAL_PATH)/ffmpeg/lib/libavcodec.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libavformat.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libavdevice.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libswresample.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libavfilter.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libavutil.a \
+	$(LOCAL_PATH)/ffmpeg/lib/libswscale.a
+
+LOCAL_CFLAGS += \
+    -O3 -std=c99 -fno-math-errno -fno-signed-zeros -fomit-frame-pointer \
+    -Wdisabled-optimization -Wpointer-arith \
+    -Wwrite-strings -Wtype-limits -Wundef -Wmissing-prototypes \
+    -Wno-pointer-to-int-cast -Wstrict-prototypes -Wempty-body -Wno-parentheses \
+    -Wno-switch -Wno-format-zero-length -Wno-pointer-sign \
+    -Werror=format-security -Werror=implicit-function-declaration -Werror=missing-prototypes \
+    -Werror=return-type -Werror=vla -Wformat -Wno-maybe-uninitialized -fPIC
+
+LOCAL_LDFLAGS := -Wl,--no-fatal-warnings -Wl,-Bsymbolic
+
+LOCAL_CLANG_CFLAGS += -Rpass=loop-vectorize
+LOCAL_CLANG_ASFLAGS += -no-integrated-as
+
+
+include $(BUILD_EXECUTABLE)
